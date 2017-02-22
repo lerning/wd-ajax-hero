@@ -12,7 +12,18 @@ main {
 .navbar-fixed {
   margin-bottom: 15px;
 }
-
+button.btn-large {
+   background-color: rgba(112, 67, 168, 0.73);
+}
+.btn:hover, .btn-large:hover {
+   background-color: rgb(186, 130, 235);
+}
+div.nav-wrapper {
+    background-color: rgb(26, 144, 170);
+}
+footer.page-footer {
+       background-color: rgb(26, 144, 170);
+}
 .poster {
   height: 380px;
   max-width: 100%;

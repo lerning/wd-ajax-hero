@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  const movies = [];
+  let movies = [];
 
   const renderMovies = function() {
     $('#listings').empty();
@@ -57,4 +57,37 @@
   };
 
   // ADD YOUR CODE HERE
+  $('button').click(function(e){
+     e.preventDefault();
+     movies = []
+     let userSearch = $('input').val()
+     if (userSearch !== ''){
+        $.ajax({
+          //method for the HTTP request e.g. GET, POST, ..
+          method: 'GET',
+          //url is the place where the data lives
+          url: `http://omdbapi.com/?s=${userSearch}`,
+          //the format of data you want to get back
+          dataType: 'json',
+          //stuff that happens if I get the data I want back
+          success: function(data){
+             let ds = data.Search
+             console.log(ds);
+             for (let m of ds){
+                let id = m.imdbID
+                let poster = m.Poster
+                let title = m.Title
+                let year = m.Year
+                let movie = { id, poster, title, year }
+                movies.push(movie)
+             } renderMovies()
+          },
+          //what to do if I don't get what I want
+          error: function(){
+             console.log('ruh roh');
+          }
+         })
+   }
+ })
+
 })();
